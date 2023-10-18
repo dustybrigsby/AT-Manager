@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { Grid } from '@mui/material';
 
-import { QUERY_SINGLE_STUDENT } from '../utils/queries';
+import { QUERY_SINGLE_STUDENT } from '../../../utils/queries';
 
 const SingleStudent = () => {
   const { studentId } = useParams();

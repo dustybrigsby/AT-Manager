@@ -7,10 +7,14 @@ import { Box, ThemeProvider, createTheme, CssBaseline } from '@mui/material';
 import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
-import Header from './components/Header';
-import Footer from './components/Footer';
+import Header from './pages/components/Header';
+import Footer from './pages/components/Footer';
 import Contact from './pages/Contact';
+import Loans from './pages/Loans/Loans';
 import Students from './pages/Students/Students';
+import Staff from './pages/Staff/Staff';
+import Tools from './pages/Tools/Tools';
+import NoMatch from './pages/NoMatch';
 
 import Auth from './utils/auth';
 
@@ -76,25 +80,39 @@ function App() {
                   element={<Signup />
                   } />
                 <Route
+                  path='/loans'
+                  element={<Loans />
+                  } />
+                <Route
                   path='/students'
                   element={<Students />
                   } />
                 <Route
-                  path='/contact'
-                  element={<Contact />
+                  path='/staff'
+                  element={<Staff />
+                  } />
+                <Route
+                  path='/tools'
+                  element={<Tools />
+                  } />
+                <Route
+                  path='*'
+                  element={<NoMatch />
                   } />
               </Routes>
             ) : (
               <Routes>
                 <Route
                   path='/login'
-                  element={<Login currentSection={currentSection}
-                    setCurrentSection={setCurrentSection} />
+                  element={<Login />
+                  } />
+                <Route
+                  path='/contact'
+                  element={<Contact />
                   } />
                 <Route
                   path='*'
-                  element={<Signup currentSection={currentSection}
-                    setCurrentSection={setCurrentSection} />
+                  element={<Signup />
                   } />
               </Routes>
             )}

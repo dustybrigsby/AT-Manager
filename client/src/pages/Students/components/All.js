@@ -1,9 +1,11 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
 import { Link as RouterLink } from 'react-router-dom';
-import { Container, Link, Typography, Stack, Paper, Box } from '@mui/material';
+import { Container, Link, Typography, Stack, Paper, Box, Button } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 import { QUERY_STUDENTS } from '../../../utils/queries';
+import { DELETE_STUDENTS } from '../StudentMutations';
 
 
 const StudentList = () => {
@@ -18,13 +20,13 @@ const StudentList = () => {
 
   return (
     <Container>
-      <Typography variant='h3' mb={2}>Students</Typography>
       <Stack direction='row' spacing={1} alignItems='center' justifyContent='space-evenly' textAlign='center' p={1}>
         <Typography width='35%' textAlign='left'>Name</Typography>
         <Typography width='10%'>SID</Typography>
         <Typography width='15%'>School</Typography>
-        <Typography width='10%'># Loans</Typography>
+        <Typography width='10%'>Loans</Typography>
         <Typography width='20%'>Email</Typography>
+        <Box width='10%'>Delete</Box>
       </Stack>
 
       {loading ? (
@@ -52,6 +54,11 @@ const StudentList = () => {
                 </Box>
                 <Box>
                   <Typography>{student.email}</Typography>
+                </Box>
+                <Box>
+                  <Button color='error'>
+                    <DeleteIcon />
+                  </Button>
                 </Box>
               </Stack>
 

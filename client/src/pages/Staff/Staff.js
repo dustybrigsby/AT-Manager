@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/client';
 import { Link as RouterLink } from 'react-router-dom';
 import { Container, Link, Typography, Stack, Paper, Box } from '@mui/material';
 
-import { QUERY_STAFF } from '../utils/queries';
+import { QUERY_STAFF } from '../../utils/queries';
 
 
 const StudentList = () => {

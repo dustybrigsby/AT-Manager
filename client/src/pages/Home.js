@@ -1,10 +1,10 @@
 import React from 'react';
 // import { useQuery } from '@apollo/client';
 
-import Loans from '../components/Loans';
-import Students from './Student/components/AllStudents';
-import Staff from '../components/Staff';
-import Tools from '../components/Tools';
+import Loans from './Loans/Loans';
+import Students from './Students/Students';
+import Staff from './Staff/Staff';
+import Tools from './Tools/Tools';
 
 import { Container } from '@mui/material';
 

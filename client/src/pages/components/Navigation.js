@@ -1,4 +1,4 @@
-import Auth from "../utils/auth";
+import Auth from "../../utils/auth";
 import { Link as RouterLink } from 'react-router-dom';
 import { Grid, Button, Stack, Typography } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -8,7 +8,7 @@ const Navigation = ({ currentSection, setCurrentSection }) => {
         event.preventDefault();
         Auth.logout();
     };
-    const sections = ['Loans', 'Student', 'Staff', 'Tools'];
+    const sections = ['Loans', 'Students', 'Staff', 'Tools'];
 
     return (
         <Grid item xs='12' md='4'
@@ -28,14 +28,15 @@ const Navigation = ({ currentSection, setCurrentSection }) => {
                     {sections.map(section => (
                         <Button
                             onClick={() => setCurrentSection(section)}
-
+                            variant={currentSection === section ? 'outlined' : 'text'}
                         >
                             <Typography
                                 variant='h6'
                                 key={section}
-                                underline={currentSection === section ? 'always' : 'hover'}
+                                component={RouterLink}
+                                sx={{ textDecoration: 'none' }}
+                                to={`/${section.toLowerCase().replace(' ', '-')}`}
                                 color={currentSection === section ? 'primary.light' : 'primary.dark'}
-                                href={`/${section.toLowerCase().replace(' ', '-')}`}
                             >
                                 {section}
                             </Typography>
@@ -53,8 +54,16 @@ const Navigation = ({ currentSection, setCurrentSection }) => {
                 </Stack>
             ) : (
                 <>
-                    <Button component={RouterLink} to="/login">Login</Button>
-                    <Button component={RouterLink} to="/signup">Signup</Button>
+                    <Button component={RouterLink} to="/login">
+                        <Typography variant='h6' pr={'5px'}>
+                            Login
+                        </Typography>
+                    </Button>
+                    <Button component={RouterLink} to="/signup">
+                        <Typography variant='h6' pr={'5px'}>
+                            Signup
+                        </Typography>
+                    </Button>
                 </>
             )}
         </Grid>

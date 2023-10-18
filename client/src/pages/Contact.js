@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { validateEmail } from "../utils/helpers";
-import { TextField, Button, Grid, Typography } from "@mui/material";
+import { TextField, Button, Grid, Container } from "@mui/material";
 
 function Contact() {
   const [formData, setFormData] = useState({
@@ -62,62 +62,63 @@ function Contact() {
   };
 
   return (
-    <Grid
-      container
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
-      <Typography>Hello {formData.name}</Typography>
-      <form onSubmit={handleFormSubmit}>
-        <TextField
-          variant="outlined"
-          margin="normal"
-          fullWidth
-          id="name"
-          label="Name"
-          name="name"
-          value={formData.name}
-          onChange={handleInputChange}
-          error={nameError}
-          helperText={nameHelperText}
-          onBlur={validateInput}
-          required
-        />
-        <TextField
-          variant="outlined"
-          margin="normal"
-          fullWidth
-          id="email"
-          label="Email Address"
-          name="email"
-          value={formData.email}
-          onChange={handleInputChange}
-          error={emailError}
-          helperText={emailHelperText}
-          onBlur={validateInput}
-          required
-        />
-        <TextField
-          variant="outlined"
-          margin="normal"
-          fullWidth
-          multiline
-          rows={4}
-          id="message"
-          label="Message"
-          name="message"
-          value={formData.message}
-          onChange={handleInputChange}
-          error={messageError}
-          helperText={messageHelperText}
-          onBlur={validateInput}
-          required
-        />
-        <Button type="submit">Submit</Button>
-      </form>
-    </Grid>
+    <Container maxWidth='md' sx={{ py: 8 }}>
+      <Grid
+        container
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <form onSubmit={handleFormSubmit}>
+          <TextField
+            variant="outlined"
+            margin="normal"
+            fullWidth
+            id="name"
+            label="Name"
+            name="name"
+            value={formData.name}
+            onChange={handleInputChange}
+            error={nameError}
+            helperText={nameHelperText}
+            onBlur={validateInput}
+            required
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            fullWidth
+            id="email"
+            label="Email Address"
+            name="email"
+            value={formData.email}
+            onChange={handleInputChange}
+            error={emailError}
+            helperText={emailHelperText}
+            onBlur={validateInput}
+            required
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            fullWidth
+            multiline
+            rows={4}
+            id="message"
+            label="Message"
+            name="message"
+            value={formData.message}
+            onChange={handleInputChange}
+            error={messageError}
+            helperText={messageHelperText}
+            onBlur={validateInput}
+            required
+          />
+          <Button type="submit">Submit</Button>
+        </form>
+      </Grid>
+    </Container>
   );
 }
 

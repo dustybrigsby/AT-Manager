@@ -52,19 +52,3 @@ export const QUERY_SINGLE_STUDENT = gql`
   }
 }
 `;
-
-export const QUERY_STAFF = gql`
-  query me {
-    me {
-      _id
-      username
-      email
-      thoughts {
-        _id
-        thoughtText
-        thoughtAuthor
-        createdAt
-      }
-    }
-  }
-`;

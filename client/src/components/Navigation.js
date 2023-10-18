@@ -1,6 +1,6 @@
 import Auth from "../utils/auth";
 import { Link as RouterLink } from 'react-router-dom';
-import { Grid, Button, Stack, Typography, Link } from '@mui/material';
+import { Grid, Button, Stack, Typography } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
 
 const Navigation = ({ currentSection, setCurrentSection }) => {
@@ -8,7 +8,7 @@ const Navigation = ({ currentSection, setCurrentSection }) => {
         event.preventDefault();
         Auth.logout();
     };
-    const sections = ['Loans', 'Students', 'Staff', 'Tools'];
+    const sections = ['Loans', 'Student', 'Staff', 'Tools'];
 
     return (
         <Grid item xs='12' md='4'
@@ -35,7 +35,7 @@ const Navigation = ({ currentSection, setCurrentSection }) => {
                                 key={section}
                                 underline={currentSection === section ? 'always' : 'hover'}
                                 color={currentSection === section ? 'primary.light' : 'primary.dark'}
-                                href={'/'}
+                                href={`/${section.toLowerCase().replace(' ', '-')}`}
                             >
                                 {section}
                             </Typography>

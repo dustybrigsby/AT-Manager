@@ -18,7 +18,7 @@ const resolvers = {
     },
 
     students: async () => {
-      return await Student.find().populate('school').populate('team').populate('loans').populate('loans.tools');
+      return await Student.find().populate('school').populate('loans');
     },
     student: async (parent, args) => {
       return await Student.findById(args.id).populate('school');
@@ -46,6 +46,7 @@ const resolvers = {
   },
 
   Mutation: {
+    // USER
     addUser: async (parent, { username, email, password }) => {
       const user = await User.create({ username, email, password });
       const token = signToken(user);
@@ -70,6 +71,7 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
 
+    // STUDENT
     addStudent: async (parent, { sid, firstName, lastName, middleName, email, school }) => {
       const student = await Student.create({ sid, firstName, lastName, middleName, email, school });
       return student;
@@ -83,6 +85,7 @@ const resolvers = {
       return deletedStudent;
     },
 
+    // STAFF
     addStaff: async (parent, { firstName, lastName, middleName, email, role, schools, students }) => {
       const staff = await Staff.create({ firstName, lastName, middleName, email, role, schools, students });
       return staff;
@@ -96,6 +99,7 @@ const resolvers = {
       return deletedstaff;
     },
 
+    // SCHOOL
     addSchool: async (parent, { name, students, staff }) => {
       const school = await School.create({ name, students, staff });
       return school;
@@ -109,6 +113,7 @@ const resolvers = {
       return deletedschool;
     },
 
+    // TOOL
     addTool: async (parent, { assetTag, name, description, serial, model, stock, available }) => {
       const tool = await Tool.create({ assetTag, name, description, serial, model, stock, available });
       return tool;
@@ -122,6 +127,7 @@ const resolvers = {
       return deletedtool;
     },
 
+    // LOAN
     addLoan: async (parent, { student, tools, status }) => {
       const loan = await Loan.create({ student, tools, status });
       return loan;

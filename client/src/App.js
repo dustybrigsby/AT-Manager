@@ -10,7 +10,7 @@ import Login from './pages/Login';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Contact from './pages/Contact';
-import SingleStudent from './pages/SingleStudent';
+import Students from './pages/Students/Students';
 
 import Auth from './utils/auth';
 
@@ -76,22 +76,25 @@ function App() {
                   element={<Signup />
                   } />
                 <Route
-                  path='/student/:studentId'
-                  element={<SingleStudent />
+                  path='/students'
+                  element={<Students />
+                  } />
+                <Route
+                  path='/contact'
+                  element={<Contact />
                   } />
               </Routes>
             ) : (
               <Routes>
                 <Route
-                  path='/signup'
-                  element={<Signup currentSection={currentSection}
+                  path='/login'
+                  element={<Login currentSection={currentSection}
                     setCurrentSection={setCurrentSection} />
                   } />
                 <Route
                   path='*'
-                  element={
-                    <Login currentSection={currentSection}
-                      setCurrentSection={setCurrentSection} />
+                  element={<Signup currentSection={currentSection}
+                    setCurrentSection={setCurrentSection} />
                   } />
               </Routes>
             )}

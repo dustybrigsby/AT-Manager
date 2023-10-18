@@ -9,7 +9,6 @@ const SingleStudent = () => {
   const { studentId } = useParams();
 
   const { loading, data } = useQuery(QUERY_SINGLE_STUDENT, {
-    // pass URL parameter
     variables: { studentId: studentId },
   });
 

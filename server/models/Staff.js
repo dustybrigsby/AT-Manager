@@ -1,5 +1,4 @@
 const { Schema, model } = require("mongoose");
-const bcrypt = require("bcrypt");
 
 const staffSchema = new Schema({
   firstName: {
@@ -21,6 +20,10 @@ const staffSchema = new Schema({
     required: true,
     unique: true,
   },
+  role: {
+    type: String,
+    required: true,
+  },
   schools: [
     {
       type: Schema.Types.ObjectId,
@@ -37,6 +40,6 @@ const staffSchema = new Schema({
   ],
 });
 
-const Staff = model("Staff", staffSchema);
+const Staff = model("Staff", staffSchema, "staff");
 
 module.exports = Staff;

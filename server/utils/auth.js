@@ -1,7 +1,9 @@
 const jwt = require('jsonwebtoken');
 
-const secret = 'mysecretssshhhhhhh';
-const expiration = '2h';
+const secret = process.env.REACT_APP_SECRET || 'everett14alaric16';
+const expiration = process.env.REACT_APP_EXPIRATION || '2h';
+console.log('secret:', secret);
+
 
 module.exports = {
   authMiddleware: function ({ req }) {
@@ -28,8 +30,9 @@ module.exports = {
     // return the request object so it can be passed to the resolver as `context`
     return req;
   },
-  signToken: function ({ email, name, _id }) {
-    const payload = { email, name, _id };
+  signToken: function ({ email, username, _id }) {
+    const payload = { email, username, _id };
+    console.log('payload:', payload);
     return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
   },
 };

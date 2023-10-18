@@ -4,14 +4,13 @@
   "description": "",
   "main": "server/server.js",
   "scripts": {
-    "start": "node server --ignore client",
+    "start": "cd server && npm run start",
     "develop": "concurrently \"cd server && npm run start\" \"cd client && npm start\"",
     "install": "cd server && npm i && cd ../client && npm i",
-    "seed": "cd server && npm run seed",
     "build": "cd client && npm run build"
   },
   "keywords": [],
-  "author": "",
+  "author": "Dusty Brigsby",
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^5.1.0"

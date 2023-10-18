@@ -35,7 +35,7 @@ const toolSchema = new Schema({
   status: {
     type: String,
     required: true,
-    default: "Available",
+    default: "available",
   },
 });
 

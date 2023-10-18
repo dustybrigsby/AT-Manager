@@ -25,10 +25,6 @@ const studentSchema = new Schema({
     type: String,
     trim: true,
   },
-  nickName: {
-    type: String,
-    trim: true,
-  },
   email: {
     type: String,
     required: true,
@@ -37,7 +33,6 @@ const studentSchema = new Schema({
   school: {
     type: Schema.Types.ObjectId,
     ref: "School",
-    required: true,
   },
   team: [
     {

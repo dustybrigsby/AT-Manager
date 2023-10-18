@@ -1,84 +1,138 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { Profile } = require('../models');
+const { User, Student, Staff, School, Tool, Loan } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
   Query: {
-    profiles: async () => {
-      return Profile.find();
+    users: async () => {
+      return User.find();
     },
-
-    profile: async (parent, { profileId }) => {
-      return Profile.findOne({ _id: profileId });
+    user: async (parent, { userId }) => {
+      return User.findOne({ _id: userId });
     },
-    // By adding context to our query, we can retrieve the logged in user without specifically searching for them
     me: async (parent, args, context) => {
       if (context.user) {
-        return Profile.findOne({ _id: context.user._id });
+        return User.findOne({ _id: context.user._id });
       }
       throw new AuthenticationError('You need to be logged in!');
     },
+
+    students: async () => {
+      return await Student.find().populate('school').populate('team').populate('loans').populate('loans.tools');
+    },
+    student: async (parent, args) => {
+      return await Student.findById(args.id).populate('school');
+    },
+
+    staff: async () => {
+      return await Staff.find();
+    },
+
+    schools: async () => {
+      return await School.find();
+    },
+    school: async (parent, args) => {
+      return await School.findById(args.id).populate('student');
+    },
+
+    tools: async () => {
+      return await Tool.find();
+    },
+
+    loans: async () => {
+      return await Loan.find();
+    },
+
   },
 
   Mutation: {
-    addProfile: async (parent, { name, email, password }) => {
-      const profile = await Profile.create({ name, email, password });
-      const token = signToken(profile);
-
-      return { token, profile };
+    addUser: async (parent, { username, email, password }) => {
+      const user = await User.create({ username, email, password });
+      const token = signToken(user);
+      return { token, user };
     },
     login: async (parent, { email, password }) => {
-      const profile = await Profile.findOne({ email });
-
-      if (!profile) {
-        throw new AuthenticationError('No profile with this email found!');
+      const user = await User.findOne({ email });
+      if (!user) {
+        throw new AuthenticationError('No user with this email found!');
       }
-
-      const correctPw = await profile.isCorrectPassword(password);
-
+      const correctPw = await user.isCorrectPassword(password);
       if (!correctPw) {
         throw new AuthenticationError('Incorrect password!');
       }
+      const token = signToken(user);
+      return { token, user };
+    },
+    deleteUser: async (parent, args, context) => {
+      if (context.user) {
+        return User.findOneAndDelete({ _id: context.user._id });
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
 
-      const token = signToken(profile);
-      return { token, profile };
+    addStudent: async (parent, { sid, firstName, lastName, middleName, email, school }) => {
+      const student = await Student.create({ sid, firstName, lastName, middleName, email, school });
+      return student;
+    },
+    updateStudent: async (parent, { id, sid, firstName, lastName, middleName, email, school, team, loans }) => {
+      const updatedStudent = await Student.findByIdAndUpdate({ _id: id }, { sid, firstName, lastName, middleName, email, school, team, loans }, { new: true });
+      return updatedStudent;
+    },
+    deleteStudent: async (parent, { id }) => {
+      const deletedStudent = await Student.findByIdAndDelete({ _id: id });
+      return deletedStudent;
     },
 
-    // Add a third argument to the resolver to access data in our `context`
-    addSkill: async (parent, { profileId, skill }, context) => {
-      // If context has a `user` property, that means the user executing this mutation has a valid JWT and is logged in
-      if (context.user) {
-        return Profile.findOneAndUpdate(
-          { _id: profileId },
-          {
-            $addToSet: { skills: skill },
-          },
-          {
-            new: true,
-            runValidators: true,
-          }
-        );
-      }
-      // If user attempts to execute this mutation and isn't logged in, throw an error
-      throw new AuthenticationError('You need to be logged in!');
+    addStaff: async (parent, { firstName, lastName, middleName, email, role, schools, students }) => {
+      const staff = await Staff.create({ firstName, lastName, middleName, email, role, schools, students });
+      return staff;
     },
-    // Set up mutation so a logged in user can only remove their profile and no one else's
-    removeProfile: async (parent, args, context) => {
-      if (context.user) {
-        return Profile.findOneAndDelete({ _id: context.user._id });
-      }
-      throw new AuthenticationError('You need to be logged in!');
+    updateStaff: async (parent, { id, firstName, lastName, middleName, email, role, schools, students }) => {
+      const updatedStaff = await Staff.findByIdAndUpdate({ _id: id }, { firstName, lastName, middleName, email, role, schools, students }, { new: true });
+      return updatedStaff;
     },
-    // Make it so a logged in user can only remove a skill from their own profile
-    removeSkill: async (parent, { skill }, context) => {
-      if (context.user) {
-        return Profile.findOneAndUpdate(
-          { _id: context.user._id },
-          { $pull: { skills: skill } },
-          { new: true }
-        );
-      }
-      throw new AuthenticationError('You need to be logged in!');
+    deleteStaff: async (parent, { id }) => {
+      const deletedstaff = await Staff.findByIdAndDelete({ _id: id });
+      return deletedstaff;
+    },
+
+    addSchool: async (parent, { name, students, staff }) => {
+      const school = await School.create({ name, students, staff });
+      return school;
+    },
+    updateSchool: async (parent, { id, name, students, staff }) => {
+      const updatedschool = await School.findByIdAndUpdate({ _id: id }, { name, students, staff }, { new: true });
+      return updatedschool;
+    },
+    deleteSchool: async (parent, { id }) => {
+      const deletedschool = await School.findByIdAndDelete({ _id: id });
+      return deletedschool;
+    },
+
+    addTool: async (parent, { assetTag, name, description, serial, model, stock, available }) => {
+      const tool = await Tool.create({ assetTag, name, description, serial, model, stock, available });
+      return tool;
+    },
+    updateTool: async (parent, { id, assetTag, name, description, serial, model, stock, available }) => {
+      const updatedtool = await Tool.findByIdAndUpdate({ _id: id }, { assetTag, name, description, serial, model, stock, available }, { new: true });
+      return updatedtool;
+    },
+    deleteTool: async (parent, { id }) => {
+      const deletedtool = await Tool.findByIdAndDelete({ _id: id });
+      return deletedtool;
+    },
+
+    addLoan: async (parent, { student, tools, status }) => {
+      const loan = await Loan.create({ student, tools, status });
+      return loan;
+    },
+    updateLoan: async (parent, { id, student, tools, status }) => {
+      const updatedloan = await Loan.findByIdAndUpdate({ _id: id }, { student, tools, status }, { new: true });
+      return updatedloan;
+    },
+    deleteLoan: async (parent, { id }) => {
+      const deletedloan = await Loan.findByIdAndDelete({ _id: id });
+      return deletedloan;
     },
   },
 };

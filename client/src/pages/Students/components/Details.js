@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
-import { Grid } from '@mui/material';
+import { Container, Typography } from '@mui/material';
 
 import { QUERY_SINGLE_STUDENT } from '../../../utils/queries';
 
@@ -15,12 +15,12 @@ const SingleStudent = () => {
   const student = data?.student || {};
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Typography>Loading...</Typography>;
   }
   return (
-    <Grid container>
+    <Container>
       {student}
-    </Grid>
+    </Container>
   );
 };
 

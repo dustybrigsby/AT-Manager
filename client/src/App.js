@@ -22,7 +22,6 @@ import Auth from './utils/auth';
 const httpLink = createHttpLink({
   uri: '/graphql',
 });
-console.log('httpLink:', httpLink);
 
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem('id_token');

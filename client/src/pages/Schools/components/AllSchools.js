@@ -9,7 +9,7 @@ import EditIcon from '@mui/icons-material/Edit';
 
 import { QUERY_SCHOOLS } from '../SchoolQueries';
 
-const AllStaff = () => {
+const AllSchools = () => {
   const { loading, data } = useQuery(QUERY_SCHOOLS);
   const schools = data?.staffs || [];
 
@@ -63,4 +63,4 @@ const AllStaff = () => {
   );
 };
 
-export default AllStaff;
+export default AllSchools;

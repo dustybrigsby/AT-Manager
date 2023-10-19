@@ -10,7 +10,7 @@ const Header = ({ currentSection, setCurrentSection }) => {
 
   return (
 
-    <Box container
+    <Box
       component='header'
       sx={{
         backgroundColor: (theme) =>
@@ -26,16 +26,12 @@ const Header = ({ currentSection, setCurrentSection }) => {
           paddingY: '15px',
         }}
       >
-        <Stack item
-          sx={{
-            textAlign: 'center',
-          }}
-        >
+        <Stack sx={{ textAlign: 'center' }}>
           <Link component={RouterLink} to='/' style={{ textDecoration: 'none' }}>
             <Typography variant='h4'>Assistive Technology Manager</Typography>
           </Link>
         </Stack>
-        <Stack item>
+        <Stack>
           <Navigation
             currentSection={currentSection}
             setCurrentSection={setCurrentSection}

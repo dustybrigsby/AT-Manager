@@ -1,24 +1,20 @@
 import Auth from "../../utils/auth";
-import { Link as RouterLink, Navigate } from 'react-router-dom';
-import { Grid, Button, Stack, Typography, Link } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
+import { Button, Stack, Typography, Link } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
 
 const Navigation = ({ currentSection, setCurrentSection }) => {
     const logout = (event) => {
         event.preventDefault();
         Auth.logout();
-        return <Navigate to='/login' />;
     };
     const sections = ['Students', 'Staff', 'Schools', 'Tools', 'Loans'];
 
     return (
-        <Grid width={{ xs: '12', md: '4' }}
+        <Stack width={{ xs: '12', md: '4' }}
             component='nav'
             alignItems='center'
             justifyContent='center'
-            sx={{
-                display: 'flex',
-            }}
         >
             {Auth.loggedIn() ? (
                 <Stack
@@ -69,7 +65,7 @@ const Navigation = ({ currentSection, setCurrentSection }) => {
                     </Button>
                 </Stack>
             )}
-        </Grid>
+        </Stack>
 
     );
 };

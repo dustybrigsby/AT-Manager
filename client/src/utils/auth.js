@@ -53,7 +53,7 @@ class AuthService {
 
   logout() {
     localStorage.removeItem('id_token');
-    window.location.reload();
+    window.location.assign('http://localhost:3000/login');
   }
 }
 

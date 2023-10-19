@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Container, Typography, TextField, Button, Stack } from '@mui/material';
+import { Typography, TextField, Button, Stack } from '@mui/material';
 
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
@@ -92,9 +92,9 @@ const Signup = () => {
         )}
 
         {error && (
-          <div className="my-3 p-3 bg-danger text-white">
+          <Typography>
             {error.message}
-          </div>
+          </Typography>
         )}
 
       </Stack>

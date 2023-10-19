@@ -42,7 +42,7 @@ function AddStudent() {
         middleName: "",
         lastName: "",
         email: "",
-        school: ""
+        school: null
     });
 
     const handleFormSubmit = async (e) => {
@@ -97,8 +97,8 @@ function AddStudent() {
                 setSidError(true);
                 setSidHelperText("6-digit student ID is required");
             } else {
-                setNameError(false);
-                setNameHelperText("");
+                setSidError(false);
+                setSidHelperText("");
             }
         }
     };

@@ -37,11 +37,11 @@ function AddStaff() {
 
     const [formData, setFormData] = useState({
         firstName: "",
-        middleName: "",
+        middleName: null,
         lastName: "",
         email: "",
         role: "",
-        schools: "",
+        schools: null,
     });
 
     const handleFormSubmit = async (e) => {

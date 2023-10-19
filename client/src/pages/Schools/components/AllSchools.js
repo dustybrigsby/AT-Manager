@@ -27,32 +27,24 @@ const AllStaff = () => {
           {schools && schools.map((school) => (
             <Paper elevation={3} sx={{ p: 1 }} key={school._id}>
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1} alignItems='center' justifyContent='space-evenly' textAlign='center'>
-                <Stack width={'25%'} key={`${school.firstName}_${school.middleName}_${school.lastName}`} textAlign={{ xs: 'center', sm: 'left' }}>
-                  <FormLabel sx={{ fontSize: '0.5rem' }}>Staff Name</FormLabel>
-                  {school.middleName ?
-                    <Link component={RouterLink} to={`/staff/${school._id}`}>
-                      {`${school.firstName} ${school.middleName} ${school.lastName}`}
-                    </Link> :
-                    <Link component={RouterLink} to={`/staff/${school._id}`}>
-                      {`${school.firstName} ${school.lastName}`}
-                    </Link>
-                  }
+                <Stack width={'25%'} key={`${school.name}`} textAlign={{ xs: 'center', sm: 'left' }}>
+                  <FormLabel sx={{ fontSize: '0.5rem' }}>School Name</FormLabel>
+                  <Link component={RouterLink} to={`/staff/${school._id}`}>
+                    {`${school.name}`}
+                  </Link>
+
                 </Stack>
-                {school.schools.length ?
-                  <Stack width={'10%'} key={school.schools[0]._id}>
-                    <FormLabel sx={{ fontSize: '0.5rem' }}>Schools</FormLabel>
-                    <Link component={RouterLink} to={`/schools/${school.schools[0]._id}`}>
-                      {`${school.schools[0].name}`}
-                    </Link>
-                  </Stack> :
-                  <Stack width={'10%'} key='unknown_school'>
-                    <FormLabel sx={{ fontSize: '0.5rem' }}>Schools</FormLabel>
-                    <Typography>Unknown</Typography>
-                  </Stack>
-                }
-                <Stack>
-                  <FormLabel sx={{ fontSize: '0.5rem' }}>Email</FormLabel>
-                  <Typography>{school.email}</Typography>
+                <Stack width={'10%'} key={school.students.length}>
+                  <FormLabel sx={{ fontSize: '0.5rem' }}>Students</FormLabel>
+                  <Link component={RouterLink} to={`/students`}>
+                    {`${school.students.length}`}
+                  </Link>
+                </Stack>
+                <Stack width={'10%'} key={school.staff.length}>
+                  <FormLabel sx={{ fontSize: '0.5rem' }}>Students</FormLabel>
+                  <Link component={RouterLink} to={`/staff`}>
+                    {`${school.staff.length}`}
+                  </Link>
                 </Stack>
                 <Stack direction='row' gap={1}>
                   <Fab color='primary' aria-label='edit' size='small'>
@@ -63,10 +55,8 @@ const AllStaff = () => {
                   </Fab>
                 </Stack>
               </Stack>
-
             </Paper>
-          )
-          )}
+          ))}
         </Stack>
       )}
     </Container >

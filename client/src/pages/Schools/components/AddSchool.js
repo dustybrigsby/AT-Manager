@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useMutation } from '@apollo/client';
 import { Navigate } from 'react-router-dom';
-import { TextField, Button, Container, Stack, Box } from "@mui/material";
+import { TextField, Button, Container, Stack } from "@mui/material";
 
 import { QUERY_SCHOOLS } from '../SchoolQueries';
 import { ADD_SCHOOL } from '../SchoolMutations';
@@ -38,7 +38,7 @@ function AddSchool() {
         e.preventDefault();
 
         console.log("Form submitted", formData);
-        if (!nameError && !emailError && !nameError) {
+        if (!nameError) {
             try {
                 const { data } = await addSchool({
                     variables: {

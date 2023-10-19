@@ -1,5 +1,5 @@
 import Auth from "../../utils/auth";
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, Navigate } from 'react-router-dom';
 import { Grid, Button, Stack, Typography, Link } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
 
@@ -7,11 +7,12 @@ const Navigation = ({ currentSection, setCurrentSection }) => {
     const logout = (event) => {
         event.preventDefault();
         Auth.logout();
+        return <Navigate to='/login' />;
     };
     const sections = ['Students', 'Staff', 'Schools', 'Tools', 'Loans'];
 
     return (
-        <Grid item xs='12' md='4'
+        <Grid width={{ xs: '12', md: '4' }}
             component='nav'
             alignItems='center'
             justifyContent='center'
@@ -29,7 +30,7 @@ const Navigation = ({ currentSection, setCurrentSection }) => {
                         <Link
                             key={section}
                             component={RouterLink}
-                            underline="never"
+                            underline="none"
                             to={`/${section.toLowerCase().replace(' ', '-')}`}
                             color={currentSection === section ? 'primary.light' : 'primary.dark'}
                         >

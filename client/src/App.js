@@ -10,11 +10,11 @@ import Login from './pages/Login';
 import Header from './pages/components/Header';
 import Footer from './pages/components/Footer';
 import Contact from './pages/Contact';
-import Loans from './pages/Loans/Loans';
+// import Loans from './pages/Loans/Loans';
 import Students from './pages/Students/Students';
 import Schools from './pages/Schools/Schools';
 import Staff from './pages/Staff/Staff';
-import Tools from './pages/Tools/Tools';
+// import Tools from './pages/Tools/Tools';
 import NoMatch from './pages/NoMatch';
 
 import Auth from './utils/auth';
@@ -81,12 +81,16 @@ function App() {
                   path='/signup'
                   element={<Signup />
                   } />
-                <Route
+                {/* <Route
                   path='/loans'
                   element={<Loans />
-                  } />
+                  } /> */}
                 <Route
                   path='/students'
+                  element={<Students />
+                  } />
+                <Route
+                  path='/students/studentId:'
                   element={<Students />
                   } />
                 <Route
@@ -97,10 +101,10 @@ function App() {
                   path='/staff'
                   element={<Staff />
                   } />
-                <Route
+                {/* <Route
                   path='/tools'
                   element={<Tools />
-                  } />
+                  } /> */}
                 <Route
                   path='*'
                   element={<NoMatch />

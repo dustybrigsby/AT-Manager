@@ -5,7 +5,7 @@ import { LOGIN_USER } from '../utils/mutations';
 
 import Auth from '../utils/auth';
 
-import { Grid, Container, Typography } from '@mui/material';
+import { Container, Typography, TextField, Button, Stack } from '@mui/material';
 
 
 const Login = (props) => {
@@ -37,51 +37,56 @@ const Login = (props) => {
 
   return (
     <Container component='main'>
-      <Grid container>
-        <h4 className='card-header bg-dark text-light p-2'>Login</h4>
-        <div className='card-body'>
-          {data ? (
-            <p>
-              Success! You may now head{' '}
-              <Link to='/'>back to the homepage.</Link>
-            </p>
-          ) : (
-            <form onSubmit={handleFormSubmit}>
-              <input
-                className='form-input'
-                placeholder='Your email'
+      <Stack
+        paddingTop={6}
+        direction='row'
+        spacing={3}
+        alignItems='center'
+      >
+        <Typography variant='h5'>Login</Typography>
+
+        {data ? (
+          <Typography>
+            Success! You may now head{' '}
+            <Link to='/'>back to the homepage.</Link>
+          </Typography>
+        ) : (
+          <form onSubmit={handleFormSubmit}>
+            <Stack
+              direction='row'
+              spacing={3}
+              alignItems='center'
+            >
+              <TextField
                 name='email'
                 type='email'
+                label='Email'
                 value={formState.email}
                 onChange={handleChange}
               />
-              <input
-                className='form-input'
-                placeholder='******'
+              <TextField
                 name='password'
                 type='password'
+                label='Password'
                 value={formState.password}
                 onChange={handleChange}
               />
-              <button
-                className='btn btn-block btn-primary'
-                style={{ cursor: 'pointer' }}
-                type='submit'
-              >
+              <Button type='submit' variant='outlined'>
                 Submit
-              </button>
-            </form>
-          )}
+              </Button>
+            </Stack>
+          </form>
+        )}
 
-          {error && (
-            <Typography
-              sx={{ color: 'error.main' }}
-            >
-              {error.message}
-            </Typography>
-          )}
-        </div>
-      </Grid>
+        {error && (
+          <Typography
+            sx={{ color: 'error.main' }}
+          >
+            {error.message}
+          </Typography>
+        )}
+
+      </Stack>
     </Container>
   );
 };

@@ -27,7 +27,7 @@ const AllStaff = () => {
           {staffs && staffs.map((staff) => (
             <Paper elevation={3} sx={{ p: 1 }} key={staff._id}>
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1} alignItems='center' justifyContent='space-evenly' textAlign='center'>
-                <Stack width={'25%'} key={`${staff.firstName}_${staff.middleName}_${staff.lastName}`} textAlign={{ xs: 'center', sm: 'left' }}>
+                <Stack width={'25%'} key={`${staff._id}`} textAlign={{ xs: 'center', sm: 'left' }}>
                   <FormLabel sx={{ fontSize: '0.5rem' }}>Staff Name</FormLabel>
                   {staff.middleName ?
                     <Link component={RouterLink} to={`/staff/${staff._id}`}>
@@ -38,7 +38,7 @@ const AllStaff = () => {
                     </Link>
                   }
                 </Stack>
-                {staff.schools.length ?
+                {staff.schools ?
                   <Stack width={'10%'} key={staff.schools[0]._id}>
                     <FormLabel sx={{ fontSize: '0.5rem' }}>Schools</FormLabel>
                     <Link component={RouterLink} to={`/schools/${staff.schools[0]._id}`}>

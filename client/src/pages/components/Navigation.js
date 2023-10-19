@@ -1,6 +1,6 @@
 import Auth from "../../utils/auth";
 import { Link as RouterLink } from 'react-router-dom';
-import { Grid, Button, Stack, Typography } from '@mui/material';
+import { Grid, Button, Stack, Typography, Link } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
 
 const Navigation = ({ currentSection, setCurrentSection }) => {
@@ -8,13 +8,13 @@ const Navigation = ({ currentSection, setCurrentSection }) => {
         event.preventDefault();
         Auth.logout();
     };
-    const sections = ['Loans', 'Students', 'Staff', 'Tools'];
+    const sections = ['Students', 'Staff', 'Schools', 'Tools', 'Loans'];
 
     return (
         <Grid item xs='12' md='4'
             component='nav'
             alignItems='center'
-            justifyContent={{ xs: 'center', md: 'flex-end' }}
+            justifyContent='center'
             sx={{
                 display: 'flex',
             }}
@@ -23,37 +23,39 @@ const Navigation = ({ currentSection, setCurrentSection }) => {
                 <Stack
                     direction={{ xs: 'column', md: 'row' }}
                     spacing={2}
-                    textAlign={{ xs: 'center', md: 'flex-end' }}
+                    textAlign='center'
                 >
                     {sections.map(section => (
-                        <Button
-                            onClick={() => setCurrentSection(section)}
-                            variant={currentSection === section ? 'outlined' : 'text'}
+                        <Link
+                            key={section}
+                            component={RouterLink}
+                            underline="never"
+                            to={`/${section.toLowerCase().replace(' ', '-')}`}
+                            color={currentSection === section ? 'primary.light' : 'primary.dark'}
                         >
-                            <Typography
-                                variant='h6'
-                                key={section}
-                                component={RouterLink}
-                                sx={{ textDecoration: 'none' }}
-                                to={`/${section.toLowerCase().replace(' ', '-')}`}
-                                color={currentSection === section ? 'primary.light' : 'primary.dark'}
+                            <Button
+                                onClick={() => setCurrentSection(section)}
+                                variant={currentSection === section ? 'outlined' : 'text'}
                             >
-                                {section}
-                            </Typography>
-                        </Button>
 
+                                {section}
+
+                            </Button>
+                        </Link>
                     ))}
 
-                    <Button onClick={logout}>
-                        <Typography variant='h6' pr={'5px'}>
-                            Logout
-                        </Typography>
+                    <Button onClick={logout} pr={'5px'}>
+                        Logout
                         <LogoutIcon />
                     </Button>
 
                 </Stack>
             ) : (
-                <>
+                <Stack
+                    direction={{ xs: 'column', md: 'row' }}
+                    spacing={2}
+                    textAlign='center'
+                >
                     <Button component={RouterLink} to="/login">
                         <Typography variant='h6' pr={'5px'}>
                             Login
@@ -64,7 +66,7 @@ const Navigation = ({ currentSection, setCurrentSection }) => {
                             Signup
                         </Typography>
                     </Button>
-                </>
+                </Stack>
             )}
         </Grid>
 

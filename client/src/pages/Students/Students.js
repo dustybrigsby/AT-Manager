@@ -1,12 +1,14 @@
 import { useState } from 'react';
-// import { useQuery } from '@apollo/client';
 import { Container, Button, Stack, Typography } from '@mui/material';
 
-import All from './components/All';
+import AllStudents from './components/AllStudents';
+import AddStudent from './components/AddStudent';
 
 const Students = () => {
-  const sections = ['All', 'Add'];
-  const [currentSection, setCurrentSection] = useState('All');
+  const sections = ['View All', 'Add Student'];
+  const [currentSection, setCurrentSection] = useState('View All');
+
+  console.log('currentSection:', currentSection);
 
   return (
     <Container maxWidth='md'>
@@ -15,13 +17,14 @@ const Students = () => {
         spacing={2}
         textAlign={{ xs: 'center', md: 'flex-end' }}
         alignItems='center'
-        justifyContent='space-evenly'
+        justifyContent='flex-start'
         p={2}
       >
         {sections.map(section => (
 
           <Button
             key={section}
+            size='small'
             variant={currentSection === section ? 'outlined' : 'contained'}
             href={`#${section.toLowerCase().replace(' ', '-')}`}
             onClick={() => setCurrentSection(section)}
@@ -34,7 +37,8 @@ const Students = () => {
         ))}
       </Stack>
 
-      {currentSection === 'All' && <All />}
+      {currentSection === 'View All' && <AllStudents />}
+      {currentSection === 'Add Student' && <AddStudent />}
 
     </Container>
   );

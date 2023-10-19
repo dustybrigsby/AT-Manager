@@ -21,18 +21,21 @@ const resolvers = {
       return await Student.find().populate('school').populate('loans');
     },
     student: async (parent, args) => {
-      return await Student.findById(args.id).populate('school');
+      return await Student.findById(args.id).populate('school').populate('loans').populate('team');
     },
 
-    staff: async () => {
-      return await Staff.find();
+    staffs: async () => {
+      return await Staff.find().populate('schools');
+    },
+    staff: async (parent, args) => {
+      return await Staff.findById(args.id).populate('students').populate('schools');
     },
 
     schools: async () => {
-      return await School.find();
+      return await School.find().populate('students').populate('staff');
     },
     school: async (parent, args) => {
-      return await School.findById(args.id).populate('student');
+      return await School.findById(args.id).populate('students');
     },
 
     tools: async () => {
@@ -47,8 +50,8 @@ const resolvers = {
 
   Mutation: {
     // USER
-    addUser: async (parent, { username, email, password }) => {
-      const user = await User.create({ username, email, password });
+    addUser: async (parent, args) => {
+      const user = await User.create(args);
       const token = signToken(user);
       return { token, user };
     },
@@ -72,12 +75,14 @@ const resolvers = {
     },
 
     // STUDENT
-    addStudent: async (parent, { sid, firstName, lastName, middleName, email, school }) => {
-      const student = await Student.create({ sid, firstName, lastName, middleName, email, school });
+    addStudent: async (parent, args) => {
+      console.log('addStudent args:', args);
+      const student = await Student.create(args);
+      console.log('addStudent result:', student);
       return student;
     },
-    updateStudent: async (parent, { id, sid, firstName, lastName, middleName, email, school, team, loans }) => {
-      const updatedStudent = await Student.findByIdAndUpdate({ _id: id }, { sid, firstName, lastName, middleName, email, school, team, loans }, { new: true });
+    updateStudent: async (parent, args) => {
+      const updatedStudent = await Student.findByIdAndUpdate({ _id: id }, args, { new: true });
       return updatedStudent;
     },
     deleteStudent: async (parent, { id }) => {
@@ -86,12 +91,13 @@ const resolvers = {
     },
 
     // STAFF
-    addStaff: async (parent, { firstName, lastName, middleName, email, role, schools, students }) => {
-      const staff = await Staff.create({ firstName, lastName, middleName, email, role, schools, students });
+    addStaff: async (parent, args) => {
+      console.log('addStaff args:', args);
+      const staff = await Staff.create(args);
       return staff;
     },
-    updateStaff: async (parent, { id, firstName, lastName, middleName, email, role, schools, students }) => {
-      const updatedStaff = await Staff.findByIdAndUpdate({ _id: id }, { firstName, lastName, middleName, email, role, schools, students }, { new: true });
+    updateStaff: async (parent, args) => {
+      const updatedStaff = await Staff.findByIdAndUpdate({ _id: id }, args, { new: true });
       return updatedStaff;
     },
     deleteStaff: async (parent, { id }) => {
@@ -100,12 +106,12 @@ const resolvers = {
     },
 
     // SCHOOL
-    addSchool: async (parent, { name, students, staff }) => {
-      const school = await School.create({ name, students, staff });
+    addSchool: async (parent, args) => {
+      const school = await School.create(args);
       return school;
     },
-    updateSchool: async (parent, { id, name, students, staff }) => {
-      const updatedschool = await School.findByIdAndUpdate({ _id: id }, { name, students, staff }, { new: true });
+    updateSchool: async (parent, args) => {
+      const updatedschool = await School.findByIdAndUpdate({ _id: id }, args, { new: true });
       return updatedschool;
     },
     deleteSchool: async (parent, { id }) => {
@@ -114,12 +120,12 @@ const resolvers = {
     },
 
     // TOOL
-    addTool: async (parent, { assetTag, name, description, serial, model, stock, available }) => {
-      const tool = await Tool.create({ assetTag, name, description, serial, model, stock, available });
+    addTool: async (parent, args) => {
+      const tool = await Tool.create(args);
       return tool;
     },
-    updateTool: async (parent, { id, assetTag, name, description, serial, model, stock, available }) => {
-      const updatedtool = await Tool.findByIdAndUpdate({ _id: id }, { assetTag, name, description, serial, model, stock, available }, { new: true });
+    updateTool: async (parent, args) => {
+      const updatedtool = await Tool.findByIdAndUpdate({ _id: id }, args, { new: true });
       return updatedtool;
     },
     deleteTool: async (parent, { id }) => {
@@ -128,12 +134,12 @@ const resolvers = {
     },
 
     // LOAN
-    addLoan: async (parent, { student, tools, status }) => {
-      const loan = await Loan.create({ student, tools, status });
+    addLoan: async (parent, args) => {
+      const loan = await Loan.create(args);
       return loan;
     },
-    updateLoan: async (parent, { id, student, tools, status }) => {
-      const updatedloan = await Loan.findByIdAndUpdate({ _id: id }, { student, tools, status }, { new: true });
+    updateLoan: async (parent, args) => {
+      const updatedloan = await Loan.findByIdAndUpdate({ _id: id }, args, { new: true });
       return updatedloan;
     },
     deleteLoan: async (parent, { id }) => {

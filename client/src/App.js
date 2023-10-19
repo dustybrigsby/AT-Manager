@@ -12,6 +12,7 @@ import Footer from './pages/components/Footer';
 import Contact from './pages/Contact';
 import Loans from './pages/Loans/Loans';
 import Students from './pages/Students/Students';
+import Schools from './pages/Schools/Schools';
 import Staff from './pages/Staff/Staff';
 import Tools from './pages/Tools/Tools';
 import NoMatch from './pages/NoMatch';
@@ -21,6 +22,7 @@ import Auth from './utils/auth';
 const httpLink = createHttpLink({
   uri: '/graphql',
 });
+console.log('httpLink:', httpLink);
 
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem('id_token');
@@ -39,10 +41,10 @@ const client = new ApolloClient({
 
 function App() {
   const [currentSection, setCurrentSection] = useState('Home');
-  const defaultTheme = createTheme();
+  const theme = createTheme();
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <ThemeProvider theme={theme}>
       <CssBaseline enableColorScheme />
       <ApolloProvider client={client}>
         <Router>
@@ -64,7 +66,7 @@ function App() {
                 <Route
                   path='/'
                   element={
-                    <Home currentSection={currentSection} setCurrentSection={setCurrentSection} />
+                    <Home />
                   } />
                 <Route
                   path='/login'
@@ -86,6 +88,10 @@ function App() {
                 <Route
                   path='/students'
                   element={<Students />
+                  } />
+                <Route
+                  path='/schools'
+                  element={<Schools />
                   } />
                 <Route
                   path='/staff'

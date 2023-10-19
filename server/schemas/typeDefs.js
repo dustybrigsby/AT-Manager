@@ -62,6 +62,12 @@ const typeDefs = gql`
     status: String!
   }
 
+  type DeleteResponse {
+    success: Boolean!
+    message: String
+    deletedId: ID
+  }
+
   type Query {
     users: [User]!
     user(userId: ID!): User
@@ -70,7 +76,8 @@ const typeDefs = gql`
     students: [Student]
     student(id:ID!): Student
 
-    staff: [Staff]
+    staffs: [Staff]
+    staff(id:ID!): Staff
 
     schools: [School]
     school(id:ID!):School
@@ -82,17 +89,15 @@ const typeDefs = gql`
   type Mutation {
     addUser(name: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-    deleteUser: User
+    deleteUser: DeleteResponse
 
     addStudent(
       sid: String!
       firstName: String!
-      lastName: String!
       middleName: String
+      lastName: String!
       email: String!
       school: ID
-      team: [ID]
-      loans: [ID]
     ): Student
     updateStudent(
       id: ID!
@@ -105,7 +110,7 @@ const typeDefs = gql`
       team: [ID]
       loans: [ID]
     ): Student
-    deleteStudent(id: ID!): Student
+    deleteStudent(id: ID!): DeleteResponse
 
     addStaff(
       firstName: String!
@@ -114,7 +119,6 @@ const typeDefs = gql`
       email: String!
       role: String!
       schools: [ID]
-      students: [ID]
     ): Staff
     updateStaff(
       id: ID!
@@ -126,11 +130,11 @@ const typeDefs = gql`
       schools: [ID]
       students: [ID]
     ): Staff
-    deleteStaff(id: ID!): Staff
+    deleteStaff(id: ID!): DeleteResponse
 
     addSchool(name: String!, students: [ID], staff:[ID]): School
     updateSchool(id: ID!, name: String, students: [ID], staff:[ID]): School
-    deleteSchool(id: ID!): School
+    deleteSchool(id: ID!): DeleteResponse
 
     addTool(
       assetTag: String!
@@ -153,11 +157,11 @@ const typeDefs = gql`
       available: Int
       status: String
     ): Tool
-    deleteTool(id: ID!): Tool
+    deleteTool(id: ID!): DeleteResponse
 
     addLoan(student: ID!, tools: [ID!], status: String!): Loan
     updateLoan(id: ID, student: ID, tools: [ID], status: String): Loan
-    deleteLoan(id: ID): Loan
+    deleteLoan(id: ID): DeleteResponse
 
   }
 `;

@@ -7,25 +7,31 @@ export const ADD_STUDENT = gql`
     $lastName: String!
     $middleName: String
     $email: String!
-    $school: ID
-    $team: [ID]
-    $loans: [ID]
+    $school: ID!
   ) {
     addStudent(
-      sid: $username
+      sid: $sid
       firstName: $firstName
       lastName: $lastName
       middleName: $middleName
       email: $email
       school: $school
-      team: $team
-      loans: $loans
-    ) {
-      token
-      user {
-        _id
-        username
-      }
+    ){
+      id
+      sid
+      firstName
+      lastName
+      middleName
+      email
+      school
     }
+  }
+`;
+
+export const DELETE_STUDENT = gql`
+  mutation deleteStudent($id: ID!) {
+    success
+    message
+    deletedId
   }
 `;

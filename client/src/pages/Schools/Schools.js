@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { Container, Typography, Button, Stack } from '@mui/material';
 
-import AllStaff from './components/AllStaff';
-import AddStaff from './components/AddStaff';
+import AllSchools from './components/AllSchools';
+import AddSchool from './components/AddSchool';
 
-const Staff = () => {
-    const sections = ['View All', 'Add Staff'];
+const Schools = () => {
+    const sections = ['View All', 'Add School'];
     const [currentSection, setCurrentSection] = useState('View All');
 
     console.log('currentSection:', currentSection);
@@ -37,11 +37,11 @@ const Staff = () => {
                 ))}
             </Stack>
 
-            {currentSection === 'View All' && <AllStaff />}
-            {currentSection === 'Add Staff' && <AddStaff />}
+            {currentSection === 'View All' && <AllSchools />}
+            {currentSection === 'Add School' && <AddSchool />}
 
         </Container>
     );
 };
 
-export default Staff;
+export default Schools;

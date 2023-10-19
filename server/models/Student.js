@@ -38,7 +38,6 @@ const studentSchema = new Schema({
     {
       type: Schema.Types.ObjectId,
       ref: "Staff",
-      required: true,
     },
   ],
   loans: [

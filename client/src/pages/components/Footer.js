@@ -23,7 +23,7 @@ const Footer = () => {
         }}
       >
 
-        <Link component={RouterLink} to="/contact">
+        <Link underline='hover' component={RouterLink} to="/contact">
           Support
         </Link>
       </Container>

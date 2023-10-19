@@ -18,6 +18,10 @@ const server = new ApolloServer({
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cors());
+app.use((req, res, next) => {
+  console.log('Received Request:', req.method, req.path, req.body);
+  next();
+});
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));

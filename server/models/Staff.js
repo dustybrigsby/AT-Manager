@@ -28,14 +28,12 @@ const staffSchema = new Schema({
     {
       type: Schema.Types.ObjectId,
       ref: "School",
-      required: true,
     },
   ],
   students: [
     {
       type: Schema.Types.ObjectId,
       ref: "Student",
-      required: true,
     },
   ],
 });

@@ -1,54 +1,54 @@
-import { useState } from "react";
-import { validateEmail } from "../utils/helpers";
-import { TextField, Button, Grid, Container } from "@mui/material";
+import { useState } from 'react';
+import { validateEmail } from '../utils/helpers';
+import { TextField, Button, Grid, Container } from '@mui/material';
 
 function Contact() {
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
+    name: '',
+    email: '',
+    message: '',
   });
 
-  const [value, setValue] = useState("");
-  const [fieldName, setfieldName] = useState("");
+  const [value, setValue] = useState('');
+  const [fieldName, setfieldName] = useState('');
   const [nameError, setNameError] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const [messageError, setMessageError] = useState(false);
-  const [nameHelperText, setNameHelperText] = useState("");
-  const [emailHelperText, setEmailHelperText] = useState("");
-  const [messageHelperText, setMessageHelperText] = useState("");
+  const [nameHelperText, setNameHelperText] = useState('');
+  const [emailHelperText, setEmailHelperText] = useState('');
+  const [messageHelperText, setMessageHelperText] = useState('');
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     setValue(e.target.value);
     setfieldName(e.target.name);
-    console.log("Form submitted", formData);
+    console.log('Form submitted', formData);
   };
 
   const validateInput = () => {
-    if (fieldName === "email" && value) {
+    if (fieldName === 'email' && value) {
       if (!validateEmail(value)) {
         setEmailError(true);
-        setEmailHelperText("Valid email required");
+        setEmailHelperText('Valid email required');
       } else {
         setEmailError(false);
-        setEmailHelperText("");
+        setEmailHelperText('');
       }
-    } else if (fieldName === "name") {
+    } else if (fieldName === 'name') {
       if (!value) {
         setNameError(true);
-        setNameHelperText("Name should contain some text");
+        setNameHelperText('Name should contain some text');
       } else {
         setNameError(false);
-        setNameHelperText("");
+        setNameHelperText('');
       }
-    } else if (fieldName === "message") {
+    } else if (fieldName === 'message') {
       if (!value) {
         setMessageError(true);
-        setMessageHelperText("Message should contain some text");
+        setMessageHelperText('Message should contain some text');
       } else {
         setMessageError(false);
-        setMessageHelperText("");
+        setMessageHelperText('');
       }
     }
   };
@@ -57,7 +57,7 @@ function Contact() {
     e.preventDefault();
 
     if (!nameError && !emailError && !messageError) {
-      console.log("Form Submitted", formData);
+      console.log('Form Submitted', formData);
     }
   };
 
@@ -66,18 +66,18 @@ function Contact() {
       <Grid
         container
         sx={{
-          display: "flex",
-          flexDirection: "column",
+          display: 'flex',
+          flexDirection: 'column',
         }}
       >
         <form onSubmit={handleFormSubmit}>
           <TextField
-            variant="outlined"
-            margin="normal"
+            variant='outlined'
+            margin='normal'
             fullWidth
-            id="name"
-            label="Name"
-            name="name"
+            id='name'
+            label='Name'
+            name='name'
             value={formData.name}
             onChange={handleInputChange}
             error={nameError}
@@ -86,12 +86,12 @@ function Contact() {
             required
           />
           <TextField
-            variant="outlined"
-            margin="normal"
+            variant='outlined'
+            margin='normal'
             fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
+            id='email'
+            label='Email Address'
+            name='email'
             value={formData.email}
             onChange={handleInputChange}
             error={emailError}
@@ -100,14 +100,14 @@ function Contact() {
             required
           />
           <TextField
-            variant="outlined"
-            margin="normal"
+            variant='outlined'
+            margin='normal'
             fullWidth
             multiline
             rows={4}
-            id="message"
-            label="Message"
-            name="message"
+            id='message'
+            label='Message'
+            name='message'
             value={formData.message}
             onChange={handleInputChange}
             error={messageError}
@@ -115,7 +115,7 @@ function Contact() {
             onBlur={validateInput}
             required
           />
-          <Button type="submit">Submit</Button>
+          <Button type='submit'>Submit</Button>
         </form>
       </Grid>
     </Container>

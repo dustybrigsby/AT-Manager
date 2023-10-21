@@ -49,7 +49,7 @@ function AddSchool() {
 
                 if (data) {
                     console.log(`School was successfully added.`);
-                    window.location.assign('/login');
+                    window.location.assign('/schools');
                 } else {
                     console.log(`School failed to be added.`);
                     setNameError(true);

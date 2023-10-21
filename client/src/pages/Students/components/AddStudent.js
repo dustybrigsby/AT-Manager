@@ -62,7 +62,7 @@ function AddStudent() {
                 });
                 console.log("data", data);
 
-                if (data.success) {
+                if (data) {
                     console.log(`Student was successfully added.`);
                     return <Navigate to='/students' />;
                 } else {
@@ -180,8 +180,13 @@ function AddStudent() {
                             />
                         </Box>
                     </Stack>
-                    <Button type="button" onClick={handleFormSubmit}>Submit</Button>
-                </form>
+                    <Button
+                        type="button"
+                        variant="contained"
+                        color="success"
+                        onClick={handleFormSubmit}>
+                        Submit
+                    </Button>                </form>
             </Stack>
         </Container>
     );

@@ -86,8 +86,19 @@ const resolvers = {
       return updatedStudent;
     },
     deleteStudent: async (parent, { id }) => {
-      const deletedStudent = await Student.findByIdAndDelete({ _id: id });
-      return deletedStudent;
+      try {
+        const deletedStudent = await Student.findByIdAndDelete({ _id: id });
+        if (deletedStudent) {
+          const response = {
+            success: true,
+            deletedId: _id,
+            message: `Student with id: ${_id} successfully deleted.`
+          };
+          return response;
+        }
+      } catch (error) {
+        throw new Error("Failed to delete student");
+      }
     },
 
     // STAFF

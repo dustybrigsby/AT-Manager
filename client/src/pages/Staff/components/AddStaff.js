@@ -20,9 +20,6 @@ function AddStaff() {
     const [addStaff, { data, loading, error }] = useMutation(ADD_STAFF, {
         update(cache, { data: { addStaff } }) {
             try {
-                console.log('data:', data);
-                console.log('loading:', loading);
-                console.log('error:', error);
                 const { staffs } = cache.readQuery({ query: QUERY_STAFF });
 
                 cache.writeQuery({
@@ -62,7 +59,7 @@ function AddStaff() {
                 });
                 console.log("data", data);
 
-                if (data.success) {
+                if (data) {
                     console.log(`Staff was successfully added.`);
                     return <Navigate to='/staff' />;
                 } else {
@@ -180,7 +177,13 @@ function AddStaff() {
                             />
                         </Box>
                     </Stack>
-                    <Button type="button" onClick={handleFormSubmit}>Submit</Button>
+                    <Button
+                        type="button"
+                        variant="contained"
+                        color="success"
+                        onClick={handleFormSubmit}>
+                        Submit
+                    </Button>
                 </form>
             </Stack>
         </Container>

@@ -17,6 +17,12 @@ const AllSchools = () => {
     return <Typography variant='h3'>No Schools Yet</Typography>;
   }
 
+  const handleDelete = async (e) => {
+    e.preventDefault();
+
+    console.log("handleDelete called");
+  };
+
   return (
     <Container>
       {loading ? (
@@ -24,7 +30,12 @@ const AllSchools = () => {
       ) : (
         <Stack spacing={2} paddingBottom={6}>
           {schools && schools.map((school) => (
-            <Paper elevation={3} sx={{ p: 1 }} key={school._id}>
+            <Paper
+              key={school._id}
+              className='card'
+              elevation={3}
+              sx={{ p: 1 }}
+            >
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1} alignItems='center' justifyContent='space-evenly' textAlign='center'>
                 <Stack width={'25%'} key={`${school.name}`} textAlign={{ xs: 'center', sm: 'left' }}>
                   <FormLabel sx={{ fontSize: '0.5rem' }}>School Name</FormLabel>
@@ -46,10 +57,19 @@ const AllSchools = () => {
                   </Link>
                 </Stack>
                 <Stack direction='row' gap={1}>
-                  <Fab color='primary' aria-label='edit' size='small'>
+                  <Fab
+                    color='primary'
+                    aria-label='edit'
+                    size='small'
+                  >
                     <EditIcon />
                   </Fab>
-                  <Fab color='error' aria-label='delete' size='small'>
+                  <Fab
+                    color='error'
+                    aria-label='delete'
+                    size='small'
+                    onClick={handleDelete}
+                  >
                     <DeleteIcon />
                   </Fab>
                 </Stack>

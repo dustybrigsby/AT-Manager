@@ -98,8 +98,14 @@ function AddSchool() {
                             required
                         />
                     </Stack>
-                    <Button type="button" onClick={handleFormSubmit}>Submit</Button>
-                </form>
+                    <Button
+                        type="button"
+                        variant="contained"
+                        color="success"
+                        onClick={handleFormSubmit}
+                    >
+                        Submit
+                    </Button>                </form>
             </Stack>
         </Container>
     );

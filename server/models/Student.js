@@ -4,6 +4,7 @@ const studentSchema = new Schema({
   sid: {
     type: String,
     required: true,
+    unique: true,
     validate: {
       validator: function (value) {
         return /^[0-9]{6}$/.test(value);

@@ -8,6 +8,7 @@ import EditIcon from '@mui/icons-material/Edit';
 
 
 import { QUERY_STUDENTS } from '../StudentQueries';
+import { DELETE_STUDENT } from '../StudentMutations';
 
 const AllStudents = () => {
   const { loading, data } = useQuery(QUERY_STUDENTS);
@@ -18,6 +19,12 @@ const AllStudents = () => {
     return <Typography variant='h3'>No Students Yet</Typography>;
   }
 
+  const handleDelete = async (e) => {
+    e.preventDefault();
+
+    console.log("handleDelete called");
+  };
+
   return (
     <Container>
       {loading ? (
@@ -25,7 +32,12 @@ const AllStudents = () => {
       ) : (
         <Stack spacing={2} paddingBottom={6}>
           {students && students.map((student) => (
-            <Paper elevation={3} sx={{ p: 1 }} key={student._id}>
+            <Paper
+              key={student._id}
+              className='card'
+              elevation={3}
+              sx={{ p: 1 }}
+            >
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1} alignItems='center' justifyContent='space-evenly' textAlign='center'>
                 <Stack width={'25%'} key={`${student.firstName}_${student.middleName}_${student.lastName}`} textAlign={{ xs: 'center', sm: 'left' }}>
                   <FormLabel sx={{ fontSize: '0.5rem' }}>Student Name</FormLabel>
@@ -57,10 +69,19 @@ const AllStudents = () => {
                   <FormLabel sx={{ fontSize: '0.5rem' }}>Email</FormLabel>
                   <Typography>{student.email}</Typography>
                 </Stack>
-                <Fab color='primary' aria-label='edit' size='small'>
+                <Fab
+                  color='primary'
+                  aria-label='edit'
+                  size='small'
+                >
                   <EditIcon />
                 </Fab>
-                <Fab color='error' aria-label='delete' size='small'>
+                <Fab
+                  color='error'
+                  aria-label='delete'
+                  size='small'
+                  onClick={handleDelete}
+                >
                   <DeleteIcon />
                 </Fab>
               </Stack>

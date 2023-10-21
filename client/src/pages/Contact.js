@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { validateEmail } from '../utils/helpers';
-import { TextField, Button, Grid, Container } from '@mui/material';
+import { TextField, Button, Stack, Container } from '@mui/material';
 
 function Contact() {
   const [formData, setFormData] = useState({
@@ -62,9 +62,8 @@ function Contact() {
   };
 
   return (
-    <Container maxWidth='md' sx={{ py: 8 }}>
-      <Grid
-        container
+    <Container component='main'>
+      <Stack
         sx={{
           display: 'flex',
           flexDirection: 'column',
@@ -115,9 +114,9 @@ function Contact() {
             onBlur={validateInput}
             required
           />
-          <Button type='submit'>Submit</Button>
+          <Button type='submit' variant='outlined'>Submit</Button>
         </form>
-      </Grid>
+      </Stack>
     </Container>
   );
 }

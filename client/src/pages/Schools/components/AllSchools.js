@@ -6,7 +6,6 @@ import { FormLabel, Container, Link, Typography, Stack, Paper, Fab } from '@mui/
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
-
 import { QUERY_SCHOOLS } from '../SchoolQueries';
 
 const AllSchools = () => {

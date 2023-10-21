@@ -1,4 +1,4 @@
-const { gql } = require('apollo-server-express');
+const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
   type User {
@@ -42,7 +42,7 @@ const typeDefs = gql`
     students: [Student]
     staff: [Staff]
   }
-  
+
   type Tool {
     _id: ID
     assetTag: String!
@@ -74,22 +74,22 @@ const typeDefs = gql`
     me: User
 
     students: [Student]
-    student(id:ID!): Student
+    student(id: ID!): Student
 
     staffs: [Staff]
-    staff(id:ID!): Staff
+    staff(id: ID!): Staff
 
     schools: [School]
-    school(id:ID!):School
+    school(id: ID!): School
 
     tools: [Tool]
     loans: [Loan]
   }
 
   type Mutation {
-    addUser(name: String!, email: String!, password: String!): Auth
+    addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-    deleteUser: DeleteResponse
+    deleteUser(id:ID!): DeleteResponse
 
     addStudent(
       sid: String!
@@ -132,8 +132,13 @@ const typeDefs = gql`
     ): Staff
     deleteStaff(id: ID!): DeleteResponse
 
-    addSchool(name: String!, students: [ID], staff:[ID]): School
-    updateSchool(id: ID!, name: String, students: [ID], staff:[ID]): School
+    addSchool(name: String!): School
+    updateSchool(
+      id: ID!
+      name: String
+      students: [ID]
+      staff: [ID]
+    ): School
     deleteSchool(id: ID!): DeleteResponse
 
     addTool(
@@ -162,7 +167,6 @@ const typeDefs = gql`
     addLoan(student: ID!, tools: [ID!], status: String!): Loan
     updateLoan(id: ID, student: ID, tools: [ID], status: String): Loan
     deleteLoan(id: ID): DeleteResponse
-
   }
 `;
 

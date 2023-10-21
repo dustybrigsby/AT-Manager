@@ -11,7 +11,7 @@ import { Container } from '@mui/material';
 const Home = ({ currentSection, setCurrentSection }) => {
 
   return (
-    <Container maxWidth='md' sx={{ py: 8, }}>
+    <Container component='main' sx={{ py: 8, }}>
       {currentSection === 'Loans' && (
         <Loans />
       )}

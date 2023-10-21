@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Typography, TextField, Button, Stack } from '@mui/material';
+import { Typography, TextField, Button, Stack, Container } from '@mui/material';
 
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
@@ -40,7 +40,7 @@ const Signup = () => {
   };
 
   return (
-    <main className="flex-row justify-center mb-4">
+    <Container component='main'>
       <Stack
         paddingTop={6}
         direction='row'
@@ -98,7 +98,7 @@ const Signup = () => {
         )}
 
       </Stack>
-    </main>
+    </Container>
   );
 };
 

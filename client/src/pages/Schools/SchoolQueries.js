@@ -1,35 +1,16 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const QUERY_SCHOOLS = gql`
   query getSchools {
     schools {
-    _id
-    name
-    students {
       _id
-      sid
-      firstName
-      lastName
-      middleName
-      loans {
+      name
+      students {
         _id
-        status
-        tools {
-          _id
-          assetTag
-          name
-          status
-        }
+      }
+      staff {
+        _id
       }
     }
-    staff {
-      _id
-      email
-      firstName
-      middleName
-      lastName
-      role
-    }
   }
-}
 `;

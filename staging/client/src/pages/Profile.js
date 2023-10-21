@@ -6,7 +6,7 @@ import { QUERY_USER, QUERY_ME } from '../utils/queries';
 
 import Auth from '../utils/auth';
 
-import { Grid, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 const Profile = () => {
   const { username: userParam } = useParams();
@@ -34,13 +34,11 @@ const Profile = () => {
   }
 
   return (
-    <Grid container>
-      <Grid item>
-        <Typography>
-          Viewing {userParam ? `${user.name}'s` : 'your'} profile.
-        </Typography>
-      </Grid>
-    </Grid>
+    <Box>
+      <Typography>
+        Viewing {userParam ? `${user.name}'s` : 'your'} profile.
+      </Typography>
+    </Box>
   );
 };
 

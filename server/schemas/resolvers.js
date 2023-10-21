@@ -32,7 +32,7 @@ const resolvers = {
     },
 
     schools: async () => {
-      return await School.find().populate('staff').populate({ path: 'students', populate: { path: 'loans', populate: { path: 'tools' } } });
+      return await School.find().populate('students').populate('staff');
     },
     school: async (parent, args) => {
       return await School.findById(args.id).populate('students');
@@ -107,6 +107,7 @@ const resolvers = {
 
     // SCHOOL
     addSchool: async (parent, args) => {
+      console.log('addSchool args:', args);
       const school = await School.create(args);
       return school;
     },

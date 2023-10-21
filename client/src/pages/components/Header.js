@@ -19,7 +19,7 @@ const Header = ({ currentSection, setCurrentSection }) => {
             : theme.palette.grey[800],
       }}
     >
-      <Stack container
+      <Stack
         direction='column'
         justifyContent='center'
         sx={{

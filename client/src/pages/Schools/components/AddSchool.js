@@ -47,11 +47,13 @@ function AddSchool() {
                 });
                 console.log("data", data);
 
-                if (data.success) {
+                if (data) {
                     console.log(`School was successfully added.`);
-                    return <Navigate to='/schools' />;
+                    window.location.assign('/login');
                 } else {
                     console.log(`School failed to be added.`);
+                    setNameError(true);
+                    setNameHelperText(`${fieldName} failed to be added. Please refresh the page and try again.`);
                 }
 
             } catch (error) {

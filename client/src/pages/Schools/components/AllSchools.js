@@ -10,7 +10,7 @@ import { QUERY_SCHOOLS } from '../SchoolQueries';
 
 const AllSchools = () => {
   const { loading, data } = useQuery(QUERY_SCHOOLS);
-  const schools = data?.staffs || [];
+  const schools = data?.schools || [];
 
   console.log('schools:', schools);
   if (!schools.length) {
@@ -22,7 +22,7 @@ const AllSchools = () => {
       {loading ? (
         <Typography variant='h3'>Loading...</Typography>
       ) : (
-        <Stack spacing={2}>
+        <Stack spacing={2} paddingBottom={6}>
           {schools && schools.map((school) => (
             <Paper elevation={3} sx={{ p: 1 }} key={school._id}>
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1} alignItems='center' justifyContent='space-evenly' textAlign='center'>
@@ -33,14 +33,14 @@ const AllSchools = () => {
                   </Link>
 
                 </Stack>
-                <Stack width={'10%'} key={school.students.length}>
+                <Stack width={'10%'} key={`students${school.students.length}`}>
                   <FormLabel sx={{ fontSize: '0.5rem' }}>Students</FormLabel>
                   <Link component={RouterLink} to={`/students`}>
                     {`${school.students.length}`}
                   </Link>
                 </Stack>
-                <Stack width={'10%'} key={school.staff.length}>
-                  <FormLabel sx={{ fontSize: '0.5rem' }}>Students</FormLabel>
+                <Stack width={'10%'} key={`staff${school.staff.length}`}>
+                  <FormLabel sx={{ fontSize: '0.5rem' }}>Staff</FormLabel>
                   <Link component={RouterLink} to={`/staff`}>
                     {`${school.staff.length}`}
                   </Link>

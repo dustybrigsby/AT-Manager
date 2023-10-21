@@ -1,9 +1,7 @@
 const jwt = require('jsonwebtoken');
 
-const secret = process.env.REACT_APP_SECRET || 'everett14alaric16';
-const expiration = process.env.REACT_APP_EXPIRATION || '2h';
-console.log('secret:', secret);
-
+const secret = process.env.REACT_APP_SECRET;
+const expiration = process.env.REACT_APP_EXPIRATION;
 
 module.exports = {
   authMiddleware: function ({ req }) {

@@ -120,8 +120,12 @@ function App() {
                   element={<Contact />
                   } />
                 <Route
-                  path='*'
+                  path='/signup'
                   element={<Signup />
+                  } />
+                <Route
+                  path='*'
+                  element={<NoMatch />
                   } />
               </Routes>
             )}
